@@ -30,7 +30,9 @@ dependencies {
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
 	// Apache Commons Compress의 취약한 버전
-	implementation 'org.apache.commons:commons-compress:1.18'  // 알려진 취약점 CVE-2019-12402
+	implementation 'org.apache.commons:commons-compress:1.18'
+	implementation 'org.bouncycastle:bcprov-jdk15on:1.64'
+
 
 
 
