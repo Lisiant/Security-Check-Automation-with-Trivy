@@ -264,6 +264,10 @@ Trivy를 활용해 Docker 이미지를 스캔하고, GitHub Actions를 통해 �
 
 DevSecOps의 일환으로 코드 배포 전에 자동으로 보안 취약점을 파악하여, 보안 문제를 조기에 발견하는 방법을 익힐 수 있었습니다.
 
+추가적으로 적용할 수 있는 사항은 다음과 같습니다.
+- push 시 보안 취약점이 발견되었을 경우 Slack과 연동하여 알림 서비스 제공
+- 심각도가 CRITICAL, HIGH인 보안 취약점만 출력하도록 yml 파일 수정
+
 ## **🗒️ 참고자료**
 
 https://faun.pub/how-to-scan-docker-images-e08a7b909ea0
