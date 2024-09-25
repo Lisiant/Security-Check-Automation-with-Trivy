@@ -63,7 +63,7 @@ tasks.named('bootJar') {
 
 📝 **취약점 목록**
 
-![image]("https://github.com/user-attachments/assets/33421f54-e2c0-4ac2-b585-8d40a8fbf2c2")
+![image](https://github.com/user-attachments/assets/33421f54-e2c0-4ac2-b585-8d40a8fbf2c2)
 
 - `CVE-2019-12402`
 - `CVE-2021-36090`
@@ -113,7 +113,7 @@ Docker 환경 위에 trivy를 설치하고, 이미지를 분석하였습니다.
 ```bash
 > sudo docker run --name trivydemo -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image trivydemo
 ```
-![image]("https://github.com/user-attachments/assets/565a2070-84a9-466f-82e3-78f5ee10b7af")
+![image](https://github.com/user-attachments/assets/565a2070-84a9-466f-82e3-78f5ee10b7af)
 
 
 앞서 미리 파악한 보안 취약점이 존재하는 라이브러리를 찾아내고, 안전한 버전을 추천하는 것을 확인할 수 있습니다.
