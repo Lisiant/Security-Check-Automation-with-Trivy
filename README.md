@@ -63,7 +63,7 @@ tasks.named('bootJar') {
 
 📝 **취약점 목록**
 
-<img width="1028" alt="temp1" src="https://github.com/user-attachments/assets/33421f54-e2c0-4ac2-b585-8d40a8fbf2c2">
+![image]("https://github.com/user-attachments/assets/33421f54-e2c0-4ac2-b585-8d40a8fbf2c2")
 
 - `CVE-2019-12402`
 - `CVE-2021-36090`
@@ -113,7 +113,7 @@ Docker 환경 위에 trivy를 설치하고, 이미지를 분석하였습니다.
 ```bash
 > sudo docker run --name trivydemo -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image trivydemo
 ```
-<img width="1216" alt="temp2" src="https://github.com/user-attachments/assets/565a2070-84a9-466f-82e3-78f5ee10b7af">
+![image]("https://github.com/user-attachments/assets/565a2070-84a9-466f-82e3-78f5ee10b7af")
 
 
 앞서 미리 파악한 보안 취약점이 존재하는 라이브러리를 찾아내고, 안전한 버전을 추천하는 것을 확인할 수 있습니다.
@@ -222,7 +222,7 @@ Repository의 main 브랜치에 코드를 푸시하거나 Pull Request를 생성
 
 **이전 버전의 trivy scan 결과**
 
-<img width="1218" alt="temp4" src="https://github.com/user-attachments/assets/50308546-a9ec-4ec2-816f-f0918b750639">
+![image](https://github.com/user-attachments/assets/50308546-a9ec-4ec2-816f-f0918b750639")
 
 **build.gradle에 취약점 라이브러리 추가**
 
@@ -252,7 +252,7 @@ main branch에 push가 이루어진 경우 워크플로우가 정상적으로 �
 
 Artifacts 탭에서 결과를 다운받아 확인하였습니다.
 
-<img width="1224" alt="1111" src="https://github.com/user-attachments/assets/ee6f8862-cafd-49ec-9063-112084ae94db">
+![image]("https://github.com/user-attachments/assets/ee6f8862-cafd-49ec-9063-112084ae94db")
 
 추가한 라이브러리에 존재하는 취약점을 찾아낸 것을 확인할 수 있었습니다.
 
