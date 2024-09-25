@@ -21,7 +21,7 @@ Trivy는 DevSecOps 파이프라인에 통합되어 코드 배포 전에 자동�
 
 ### 🐜 Spring Boot Demo 프로젝트 생성
 
-취약점이 존재하는 간단한 Spring Boot 프로젝트를 생성하였습니다.
+Spring Boot 프로젝트에 취약점이 존재하는 라이브러리를 추가하였습니다.
 
 **build.gradle**
 
