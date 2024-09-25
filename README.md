@@ -10,7 +10,7 @@ Trivy는 DevSecOps 파이프라인에 통합되어 코드 배포 전에 자동�
 
 본 문서에서는 Trivy를 통해 **취약점이 존재하는 Docker Image를 분석**하고, **GitHub Actions를 통한 자동화된 워크플로우를 구축**하는 내용을 다루고 있습니다.
 
-## 1️⃣ Docker Image 분석
+## 1️⃣ Trivy로 Docker Image 분석
 
 ### 구성 환경
 
