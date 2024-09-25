@@ -222,7 +222,7 @@ Repository의 main 브랜치에 코드를 푸시하거나 Pull Request를 생성
 
 **이전 버전의 trivy scan 결과**
 
-![image](https://github.com/user-attachments/assets/50308546-a9ec-4ec2-816f-f0918b750639")
+![image](https://github.com/user-attachments/assets/50308546-a9ec-4ec2-816f-f0918b750639)
 
 **build.gradle에 취약점 라이브러리 추가**
 
