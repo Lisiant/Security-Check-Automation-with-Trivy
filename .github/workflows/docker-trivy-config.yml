@@ -1,0 +1,44 @@
+name: Trivy demo with Spring Boot Application
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build Docker image
+      run: docker build -t my-spring-app .
+
+    - name: Trivy scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: my-spring-app:latest
+        format: 'table'
+        exit-code: '0'
+        ignore-unfixed: true
+        output: 'trivy-output.txt'
+
+    - name: Upload scan result
+      uses: actions/upload-artifact@v4
+      with:
+        name: trivy-scan-result
+        path: trivy-output.txt
