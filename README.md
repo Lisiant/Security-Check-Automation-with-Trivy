@@ -1,6 +1,8 @@
-# 🖼️ Trivy를 통한 컨테이너 이미지 보안 스캔 및 GitHub Actions 자동화 적용
+# 🖼️ Trivy를 통한 컨테이너 이미지 보안 스캔 및 CI/CD 보안 검사 자동화 적용
 
 ## 🔧 개요
+
+![image](https://github.com/user-attachments/assets/3f42972a-a77c-45f5-bb47-ac85a188acd8)
 
 **Trivy**는 오픈소스 보안 스캐너로, 컨테이너 이미지, 파일 시스템, 소스 코드, 인프라 구성 요소에서 취약점과 구성 오류를 탐지합니다. Docker와과 같은 컨테이너 이미지 스캔을 지원하며, IaC 도구인 Terraform, AWS CloudFormation 등에서 보안 취약점을 감지할 수 있습니다. 
 
@@ -23,7 +25,7 @@ Trivy는 DevSecOps 파이프라인에 통합되어 코드 배포 전에 자동�
 
 **build.gradle**
 
-```bash
+```gradle
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.4'
@@ -44,10 +46,10 @@ repositories {
 }
 
 dependencies {
-	// 취약점 없는 implementation 생략
+	// 취약점 없는 라이브러리 생략
 
 	// Apache Commons Compress의 취약한 버전
-	implementation 'org.apache.commons:commons-compress:1.18'  // 알려진 취약점 CVE-2019-12402
+	implementation 'org.apache.commons:commons-compress:1.18'
 
 }
 
@@ -77,7 +79,7 @@ Trivy는 Docker 기반 image를 분석하는 도구이기 때문에 해당 프�
 **Dockerfile**
 
 ```bash
-FROM gradle:8.1.0-jdk8 AS build # Spring Boot 3.3.4 버전과 호환
+FROM gradle:8.1.0-jdk8 AS build
 WORKDIR /app
 
 COPY build.gradle settings.gradle ./
@@ -124,7 +126,7 @@ GitHub Actions을 통해 Docker 이미지를 빌드하고, Trivy를 사용해 �
 
 ### 1. GitHub Repository 생성 및 Spring Boot 프로젝트 업로드
 
-GitHub Repository에 앞서 제작한 demo 프로젝트를 push하였습니다.
+GitHub Repository에 앞서 제작한 demo 프로젝트를 push하였습니다.
 
 ### 2. GitHub Actions 워크플로우 설정
 
@@ -132,7 +134,7 @@ GitHub Actions을 통해 Docker 이미지를 빌드하고, Trivy를 사용해 �
     
     GitHub Actions를 사용하기 위해 yml 파일을 통해 워크플로우를 생성하였습니다.
     
-    ```bash
+    ```yaml
     name: Trivy demo with Spring Boot Application
     
     on:
@@ -179,17 +181,18 @@ GitHub Actions을 통해 Docker 이미지를 빌드하고, Trivy를 사용해 �
             path: trivy-output.txt
     ```
     
-    **주요 섹션 설명**
+**주요 섹션 설명**
     
-    - Event trigger `on` : main branch에 `push`와 `pull request` 이벤트가 발생할 때 워크플로우가 실행되도록 지정했습니다.
-    - `jobs` 섹션 : GitHub Actions에서 실행할 작업들을 정의합니다. `build` 라는 작업을 정의했고, `runs-on: ubuntu-latest` 를 통해 Ubuntu 환경에서 실행하였습니다.
-    - `steps` 섹션: 각 단계를 지정하였습니다.
-        1. `Checkout` : GitHub repo에서 코드를 체크아웃 합니다. 즉, 최신 버전의 코드를 가져와서 사용할 수 있도록 워크플로우 환경에 다운로드합니다.
-        2. `Docker Buildx` : 여러 아키텍처에 대해 이미지를 빌드할 수 있도록 Docker Buildx를 설정합니다. 
-        3. `DockerHub` 로그인: `secrets.DOCKER_USERNAME`과 `secrets.DOCKER_PASSWORD`를 사용하여 DockerHub에 로그인합니다. secret 설정은 아래에 설명하겠습니다.
-        4. Docker 이미지 빌드: `docker build` 명령어를 통해 이미지를 build합니다.
-        5. `Trivy scan` : Trivy를 통해 Docker 이미지를 스캔하고, 결과를 `trivy-output.txt` 파일로 저장합니다.
-        6. 스캔 결과 업로드: Trivy 스캔 결과를 GitHub에 Artifact에 업로드합니다.
+- Event trigger `on` : main branch에 `push`와 `pull request` 이벤트가 발생할 때 워크플로우가 실행되도록 지정했습니다.
+- `jobs` 섹션 : GitHub Actions에서 실행할 작업들을 정의합니다. `build` 라는 작업을 정의했고, `runs-on: ubuntu-latest` 를 통해 Ubuntu 환경에서 실행하였습니다.
+- `steps` 섹션: 각 단계를 지정하였습니다.
+
+  1. `Checkout` : GitHub repo에서 코드를 체크아웃 합니다. 즉, 최신 버전의 코드를 가져와서 사용할 수 있도록 워크플로우 환경에 다운로드합니다.
+  2. `Docker Buildx` : 여러 아키텍처에 대해 이미지를 빌드할 수 있도록 Docker Buildx를 설정합니다. 
+  3. `DockerHub` 로그인: `secrets.DOCKER_USERNAME`과 `secrets.DOCKER_PASSWORD`를 사용하여 DockerHub에 로그인합니다. secret 설정은 아래에 설명하겠습니다.
+  4. Docker 이미지 빌드: `docker build` 명령어를 통해 이미지를 build합니다.
+  5. `Trivy scan` : Trivy를 통해 Docker 이미지를 스캔하고, 결과를 `trivy-output.txt` 파일로 저장합니다.
+  6. 스캔 결과 업로드: Trivy 스캔 결과를 GitHub에 Artifact에 업로드합니다.
 
 ### 3. Secrets 추가
 
@@ -200,7 +203,7 @@ Repository로 이동하여 `Settings > Security > Secrets and Variables`탭에�
 
 - 제목의 경우 yml 파일에서 설정했던 것과 같은 형식으로 설정합니다.
 - 보안을 위해 DockerHub에 로그인 시 Access Token으로 설정하는 것을 추천합니다.
-- 
+
 ![temp3](https://github.com/user-attachments/assets/0cddac74-aeb6-48fa-867f-83d9bb94a4b2)
 
 ### 4. 코드 Push 및 워크플로우 실행
@@ -211,7 +214,7 @@ Repository의 main 브랜치에 코드를 푸시하거나 Pull Request를 생성
 
 ![temp11](https://github.com/user-attachments/assets/a8091350-8d94-4a8f-b249-38ddc442927f)
 
-### **🔍 테스트 및 결과**
+### **🔍 취약점 추가 테스트 및 결과**
 
 이전 Spring Boot Application에서는  `'org.apache.commons:commons-compress:1.18'` 라이브러리에서만 취약점이 존재했습니다.
 
@@ -223,7 +226,7 @@ Repository의 main 브랜치에 코드를 푸시하거나 Pull Request를 생성
 
 **build.gradle에 취약점 라이브러리 추가**
 
-```bash
+```gradle
 dependencies {
 	// 취약점 존재하지 않는 다른 라이브러리 생략
 	
