@@ -252,7 +252,7 @@ main branch에 push가 이루어진 경우 워크플로우가 정상적으로 �
 
 Artifacts 탭에서 결과를 다운받아 확인하였습니다.
 
-![image]("https://github.com/user-attachments/assets/ee6f8862-cafd-49ec-9063-112084ae94db")
+![image](https://github.com/user-attachments/assets/38838171-f7ba-4399-b96f-c9305e97615a)
 
 추가한 라이브러리에 존재하는 취약점을 찾아낸 것을 확인할 수 있었습니다.
 
