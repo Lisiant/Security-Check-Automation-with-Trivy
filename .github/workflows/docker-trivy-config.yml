@@ -26,12 +26,12 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t my-spring-app .
+      run: docker build -t trivydemo .
 
     - name: Trivy scan
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: my-spring-app:latest
+        image-ref: trivydemo:latest
         format: 'table'
         exit-code: '0'
         ignore-unfixed: true
