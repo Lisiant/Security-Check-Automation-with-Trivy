@@ -189,7 +189,7 @@ GitHub Repository에 앞서 제작한 demo 프로젝트를 push하였습니다.
 
   1. `Checkout` : GitHub repo에서 코드를 체크아웃 합니다. 즉, 최신 버전의 코드를 가져와서 사용할 수 있도록 워크플로우 환경에 다운로드합니다.
   2. `Docker Buildx` : 여러 아키텍처에 대해 이미지를 빌드할 수 있도록 Docker Buildx를 설정합니다. 
-  3. `DockerHub` 로그인: `secrets.DOCKER_USERNAME`과 `secrets.DOCKER_PASSWORD`를 사용하여 DockerHub에 로그인합니다. secret 설정은 아래에 설명하겠습니다.
+  3. `DockerHub` 로그인: `secrets.DOCKER_USERNAME`과 `secrets.DOCKER_PASSWORD`를 사용하여 DockerHub에 로그인합니다.
   4. Docker 이미지 빌드: `docker build` 명령어를 통해 이미지를 build합니다.
   5. `Trivy scan` : Trivy를 통해 Docker 이미지를 스캔하고, 결과를 `trivy-output.txt` 파일로 저장합니다.
   6. 스캔 결과 업로드: Trivy 스캔 결과를 GitHub에 Artifact에 업로드합니다.
